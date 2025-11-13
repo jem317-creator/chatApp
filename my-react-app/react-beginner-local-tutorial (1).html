@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Beginner React (No Backend) — Local-Only Quickstart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    margin: 0;
+    padding: 32px;
+    color: #111;
+  }
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  h1, h2, h3 {
+    line-height: 1.25;
+  }
+  pre {
+    overflow: auto;
+    padding: 12px;
+    border-radius: 8px;
+    background: #0f172a;
+    color: #e2e8f0;
+  }
+  /* Inline code */
+  code {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  /* Code inside pre blocks (dark theme) */
+  pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    color: inherit;
+  }
+  .box {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: #fafafa;
+  }
+  hr { border: none; border-top: 1px solid #e5e7eb; margin: 28px 0; }
+  .muted { color: #475569; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Beginner React (No Backend) — Local-Only Quickstart</h1>
+  <p class="muted">A copy‑paste tutorial for creating a very simple React app on your computer. No backend—just a local development setup.</p>
+
+  <hr />
+
+  <h2>1) What you need (one-time)</h2>
+  <ul>
+    <li><strong>Node.js (LTS)</strong> — installs Node + <code>npm</code>. Install from <em>nodejs.org</em> (choose the LTS version).</li>
+    <li>A code editor (e.g., VS Code).</li>
+  </ul>
+  <div class="box">
+    <p><strong>Check versions:</strong></p>
+    <pre><code>node -v
+npm -v</code></pre>
+  </div>
+
+  <h2>2) Create a fresh React app (with Vite)</h2>
+  <pre><code># 2.1 Create a new project
+npm create vite@latest my-react-app -- --template react
+
+# 2.2 Go into the folder
+cd my-react-app
+
+# 2.3 Install dependencies
+npm install
+
+# 2.4 Start the local dev server
+npm run dev</code></pre>
+  <p>You should see a URL like <code>http://localhost:5173</code>. Open it in your browser.</p>
+  <p><em>What “no server connections” means:</em> You’re not building any API/backend. The dev server only serves your files locally for development. When you build, you get plain static files.</p>
+
+  <h2>3) Project layout (what each file is)</h2>
+  <pre><code>my-react-app
+├─ index.html            # The single HTML page
+├─ src/
+│  ├─ main.jsx           # Entry: boots React and mounts &lt;App /&gt;
+│  └─ App.jsx            # Your main React component (edit me!)
+├─ package.json          # Scripts &amp; dependencies</code></pre>
+
+  <h2>4) Minimal React code (copy/paste)</h2>
+  <h3><code>src/main.jsx</code></h3>
+  <pre><code>import React from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App'
+
+createRoot(document.getElementById('root')).render(
+  &lt;React.StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/React.StrictMode&gt;
+)</code></pre>
+
+  <h3><code>src/App.jsx</code></h3>
+  <pre><code>import { useState } from 'react'
+
+export default function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    &lt;div style={{ fontFamily: 'system-ui, Arial', padding: 24 }}&gt;
+      &lt;h1&gt;Hello, React 👋&lt;/h1&gt;
+      &lt;p&gt;This is a totally local app. No backend required.&lt;/p&gt;
+
+      &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;
+        You clicked {count} times
+      &lt;/button&gt;
+
+      &lt;p style={{ marginTop: 16 }}&gt;
+        Edit &lt;code&gt;src/App.jsx&lt;/code&gt;, save, and the page reloads instantly.
+      &lt;/p&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+
+  <h3><code>index.html</code> (already created by Vite)</h3>
+  <pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;My React App&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+    &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+  <h2>5) Everyday commands</h2>
+  <ul>
+    <li><strong>Run locally (hot reload):</strong>
+      <pre><code>npm run dev</code></pre>
+    </li>
+    <li><strong>Build for production (static files):</strong>
+      <pre><code>npm run build</code></pre>
+      Creates <code>dist/</code> with plain HTML/CSS/JS.
+    </li>
+    <li><strong>Preview the built app:</strong>
+      <pre><code>npm run preview</code></pre>
+    </li>
+  </ul>
+
+  <h2>6) Tiny React cheat‑sheet</h2>
+  <pre><code>// Components
+function Hello({ name }) {
+  return &lt;h2&gt;Hello, {name}!&lt;/h2&gt;
+}
+
+// State
+const [open, setOpen] = useState(false)
+
+// Events
+&lt;button onClick={() =&gt; setOpen(!open)}&gt;Toggle&lt;/button&gt;
+
+// CSS import
+import './styles.css'</code></pre>
+
+  <h2>7) Common issues &amp; quick fixes</h2>
+  <ul>
+    <li><strong>"vite: command not found"</strong> — run <code>npm install</code>; ensure Node is current (<code>node -v</code> ≥ 18 recommended).</li>
+    <li><strong>Port already in use (EADDRINUSE)</strong>
+      <pre><code>npm run dev -- --port 5174</code></pre>
+    </li>
+    <li><strong>Dev server stuck / already running</strong> — stop with <kbd>Ctrl</kbd> + <kbd>C</kbd>; on macOS free the port:
+      <pre><code>lsof -i :5173
+kill -9 &lt;PID&gt;</code></pre>
+    </li>
+  </ul>
+
+  <h2>8) Optional: one‑file starter UI (paste into <code>App.jsx</code>)</h2>
+  <pre><code>import { useState } from 'react'
+
+export default function App() {
+  const [name, setName] = useState('')
+  const [todos, setTodos] = useState([])
+
+  const addTodo = () => {
+    if (!name.trim()) return
+    setTodos(t => [...t, name.trim()])
+    setName('')
+  }
+
+  return (
+    &lt;div style={{ fontFamily: 'system-ui, Arial', padding: 24, maxWidth: 560 }}&gt;
+      &lt;h1&gt;React Starter&lt;/h1&gt;
+      &lt;p&gt;Local-only app. Try adding some items:&lt;/p&gt;
+
+      &lt;div style={{ display: 'flex', gap: 8 }}&gt;
+        &lt;input
+          value={name}
+          onChange={e => setName(e.target.value)}
+          placeholder="Type an item"
+          style={{ flex: 1, padding: 8 }}
+        /&gt;
+        &lt;button onClick={addTodo}&gt;Add&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;ul style={{ marginTop: 16 }}&gt;
+        {todos.map((t, i) => &lt;li key={i}&gt;{t}&lt;/li&gt;)}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+
+  <p class="muted">Happy hacking! 🎉</p>
+</main>
+</body>
+</html>
